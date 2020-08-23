@@ -7,6 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cardboard)](https://CRAN.R-project.org/package=cardboard)
+[![R build
+status](https://github.com/r-box/cardboard/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/cardboard/actions)
 <!-- badges: end -->
 
 The goal of cardboard is to serve as a low-level interface to the Box
