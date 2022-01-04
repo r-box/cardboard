@@ -23,7 +23,7 @@ use:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("r-box/cardboard.")
+devtools::install_github("r-box/cardboard")
 ```
 
 ## Code of Conduct

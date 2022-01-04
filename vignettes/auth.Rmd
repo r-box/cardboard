@@ -1,0 +1,120 @@
+---
+title: "auth"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{auth}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(cardboard)
+library(httr2)
+library(keyring)
+```
+
+```{r eval=FALSE}
+client_code <- oauth_client(
+  id = Sys.getenv("BOX_CLIENT_ID"),
+  secret = Sys.getenv("BOX_CLIENT_SECRET"),
+  token_url = "https://api.box.com/oauth2/token",
+  name = "boxr-ijl"
+)
+```
+
+```{r eval=FALSE}
+token <- oauth_flow_auth_code(client_code, auth_url = "https://app.box.com/api/oauth2/authorize")
+```
+
+```{r eval=FALSE}
+me <-
+  request("https://api.box.com/2.0/users/me") %>%
+  req_oauth_auth_code(client_code, auth_url = "https://app.box.com/api/oauth2/authorize") %>%
+  req_perform() %>% 
+  resp_body_json()
+```
+
+```{r eval=FALSE}
+client_cred <- oauth_client(
+  id = Sys.getenv("BOX_CLIENT_ID_CRED"),
+  secret = Sys.getenv("BOX_CLIENT_SECRET_CRED"),
+  token_url = "https://api.box.com/oauth2/token",
+  name = "boxr-ijl-cred"
+)
+```
+
+This works for enterprise, but not for user.
+
+```{r eval=FALSE}
+me <-
+  request("https://api.box.com/2.0/users/me") %>%
+  req_oauth_client_credentials(
+    client_cred, 
+    token_params = list(
+      box_subject_type = "enterprise", 
+      box_subject_id = Sys.getenv("BOX_ENTERPRISE_ID")
+    )
+  ) %>%
+  req_perform() %>% 
+  resp_body_json()
+```
+
+Look into using keyring file to store credentials for testing. 
+
+We seem to be limited to 400 bytes, so let's capture the essential information only.
+
+Ideas for API:
+
+```{r, eval=FALSE}
+# these interact with a keychain
+bx_auth_use(name = NULL, .test = TRUE)
+bx_auth_list()
+bx_auth_get(name)
+bx_auth_remove(name)
+bx_auth_rename(name, name_new)
+bx_auth_add(auth, name)
+
+# these return auth functions
+bx_auth_make_code(id, secret, .test = TRUE)
+bx_auth_make_cred(id, secret, subject_type, subject_id, .test = TRUE)
+bx_auth_make(type = c("code", "cred"), args) # internal
+bx_auth_test(auth)
+bx_auth_inspect(auth)
+
+# returns a request object
+bx_req(resource)
+bx_req_auth(resource) # uses default auth
+
+# i don't know if we need these, or to know what are the "right" options
+bx_to_json() 
+bx_from_json()
+
+# notes 
+#  - anything that is "id" or ends with "_id", convert to string
+#  - anything that ends with "at", parse to datetime
+bx_perform_json(req) # return list
+bx_pgbind_json(req, map = NULL, limit = 100, max = Inf) # return list of entries
+```
+
+```{r}
+test <- list(
+  type = "cred",
+  args = list(
+    id = Sys.getenv("BOX_CLIENT_ID_CRED"),
+    secret = Sys.getenv("BOX_CLIENT_SECRET_CRED"),
+    subject_type = "enterprise",
+    subject_id = Sys.getenv("BOX_ENTERPRISE_ID")
+  )
+)
+```
+
+
+
+

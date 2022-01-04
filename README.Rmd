@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cardboard)](https://CRAN.R-project.org/package=cardboard)
 [![R build status](https://github.com/r-box/cardboard/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/cardboard/actions)
+[![R-CMD-check](https://github.com/r-box/cardboard/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/cardboard/actions)
 <!-- badges: end -->
 
 The goal of cardboard is to serve as a low-level interface to the Box API.
@@ -30,7 +31,7 @@ When there is something, to install the development version from GitHub, use:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("r-box/cardboard.")
+devtools::install_github("r-box/cardboard")
 ```
 
 ## Code of Conduct
