@@ -1,6 +1,6 @@
 Package: cardboard
 Title: Low-level Interface to the 'Box.com API'
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person(
       given = "Ian", 
@@ -35,4 +35,8 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     keyring,
-    httr2
+    httr2,
+    askpass,
+    glue,
+    rlang,
+    magrittr
