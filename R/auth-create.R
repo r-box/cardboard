@@ -17,23 +17,25 @@
 #'   account to use.
 #' @param .test `logical` indicates to test by calling the `users/me` resource.
 #'
-#' @return `function` that takes only an `httr2:: request` object and returns a
-#'   `httr2:: request` object. This function can be used place of
+#' @return `function` that takes only an `httr2::request` object and returns a
+#'   `httr2::request` object. This function can be used place of
 #'   `httr2::req_oauth_auth_code()` or `httr2::req_oauth_auth_credentials()`.
 #' @export
 #'
-bx_auth_make_code <- function(id = NULL, secret = NULL, cache_disk = FALSE,
-                              .test = TRUE) {
+bx_auth_create_interactive <- function(id = NULL, secret = NULL,
+                                     cache_disk = FALSE, .test = TRUE) {
 
   # create client
   client <- make_client(id, secret)
+
+  auth_url = "https://app.box.com/api/oauth2/authorize"
 
   # create auth function
   req_auth <- function(req) {
     httr2::req_oauth_auth_code(
       req,
       client,
-      auth_url = "https://app.box.com/api/oauth2/authorize",
+      auth_url = auth_url,
       cache_disk = cache_disk
     )
   }
@@ -42,13 +44,14 @@ bx_auth_make_code <- function(id = NULL, secret = NULL, cache_disk = FALSE,
     bx_auth_test(req_auth)
   }
 
+  class(req_auth) <- c("cardbord_auth_interactive", "cardbord_auth")
   req_auth
 }
 
-#' @rdname bx_auth_make_code
+#' @rdname bx_auth_create_interactive
 #' @export
 #'
-bx_auth_make_credentials <- function(id = NULL, secret = NULL,
+bx_auth_create_credentials <- function(id = NULL, secret = NULL,
                                      subject_type = c("enterprise", "user"),
                                      subject_id = NULL,
                                      cache_disk = FALSE, .test = TRUE) {
@@ -63,15 +66,17 @@ bx_auth_make_credentials <- function(id = NULL, secret = NULL,
       glue("Please enter Box app subject_id ({subject_type} id):")
     )
 
+  token_params <- list(
+    box_subject_type = subject_type,
+    box_subject_id = subject_id
+  )
+
   # create auth function
   req_auth <- function(req) {
     httr2::req_oauth_client_credentials(
       req,
       client,
-      token_params = list(
-        box_subject_type = subject_type,
-        box_subject_id = subject_id
-      )
+      token_params = token_params
     )
   }
 
@@ -79,8 +84,8 @@ bx_auth_make_credentials <- function(id = NULL, secret = NULL,
     bx_auth_test(req_auth)
   }
 
+  class(req_auth) <- c("cardbord_auth_credentials", "cardbord_auth")
   req_auth
-
 }
 
 make_client <- function(id, secret) {
@@ -97,14 +102,15 @@ make_client <- function(id, secret) {
 
 #' Test an auth function
 #'
-#' @param function_req_auth `function` created using `bx_auth_make_code()` or
-#' `bx_auth_make_credentials()`
+#' @param function_req_auth `function` created using `bx_auth_create_code()` or
+#' `bx_auth_create_credentials()`
 #'
-#' @return `function_req_auth`, invisibly; called for side-effects.
+#' @return Invisible `logical`, indicating success
 #' @export
 #'
 bx_auth_test <- function(function_req_auth) {
 
+  # TODO: change, put in own file
   me <-
     httr2::request(url_box_api("users/me")) %>% # replace with bx_req
     function_req_auth() %>%
