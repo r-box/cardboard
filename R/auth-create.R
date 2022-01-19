@@ -23,7 +23,7 @@
 #' @export
 #'
 bx_auth_create_interactive <- function(id = NULL, secret = NULL,
-                                     cache_disk = FALSE, .test = TRUE) {
+                                       cache_disk = FALSE, .test = TRUE) {
 
   # create client
   client <- make_client(id, secret)
@@ -52,9 +52,9 @@ bx_auth_create_interactive <- function(id = NULL, secret = NULL,
 #' @export
 #'
 bx_auth_create_credentials <- function(id = NULL, secret = NULL,
-                                     subject_type = c("enterprise", "user"),
-                                     subject_id = NULL,
-                                     cache_disk = FALSE, .test = TRUE) {
+                                       subject_type = c("enterprise", "user"),
+                                       subject_id = NULL,
+                                       cache_disk = FALSE, .test = TRUE) {
 
   # create client
   client <- make_client(id, secret)

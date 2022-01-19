@@ -11,7 +11,7 @@ auth_inspect(auth)
 \itemize{
 \item \code{function} with S3 class \code{cardboard_auth}: uses \code{auth}.
 \item \code{character}: uses auth function using name of stored in keyring,
-see \code{bx_auth_list()}.
+see \code{bx_keyring_list()}.
 \item \code{NULL}: uses default auth-function.
 }}
 }

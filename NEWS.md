@@ -1,9 +1,13 @@
 # cardboard (development version)
 
 * Added functions for making and testing auth functions:
-  - `bx_auth_make_code()`
-  - `bx_auth_make_credentials()`
+  - `bx_auth()`
+  - `bx_auth_create_interactive()`
+  - `bx_auth_create_credentials()`
   - `bx_auth_test()`
+  - `bx_auth_serialize()`
+  - `bx_auth_parse()`
+  - `bx_auth_inspect()`
   
   (#4)
 

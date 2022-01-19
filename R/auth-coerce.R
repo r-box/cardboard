@@ -3,7 +3,7 @@
 #' @param auth can be:
 #'   - `function` with S3 class `cardboard_auth`: uses `auth`.
 #'   - `character`: uses auth function using name of stored in keyring,
-#'      see `bx_auth_list()`.
+#'      see `bx_keyring_list()`.
 #'   - `NULL`: uses default auth-function.
 #'
 #' @return `function` with S3 class `cardboard_auth`, fully operational
