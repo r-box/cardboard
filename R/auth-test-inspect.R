@@ -1,17 +1,45 @@
+#' Test an auth function
+#'
+#' @inheritParams as_auth
+#'
+#' @return Invisible `logical`, indicating success
+#' @export
+#'
+bx_auth_test <- function(auth = NULL) {
+
+  auth <- as_auth(auth)
+
+  me <-
+    httr2::request(url_box_api("users/me")) %>% # replace with bx_req
+    auth() %>%
+    httr2::req_perform() %>% # replace with bx_req_run
+    httr2::resp_body_json()
+
+  name <- me[["name"]] %||% "<not available>"
+  id <- me[["id"]] %||% "<not available>"
+  login <- me[["login"]] %||% "<not available>"
+  message(
+    glue("{name} (id: {id}, login: {login}) authorized to Box API.")
+  )
+
+  invisible(TRUE)
+}
+
 #' Inspect an auth function
 #'
-#' @inherit bx_auth params return
+#' @inheritParams as_auth
+#' @inherit bx_auth_get params return
 #'
 #' @export
 #'
 bx_auth_inspect <- function(auth = NULL) {
-  auth <- bx_auth(auth)
+  auth <- as_auth(auth)
   auth_inspect(auth)
 }
 
 #' Inspect an auth function
 #'
-#' @inherit bx_auth params return
+#' @inherit bx_auth_get params return
 #'
 #' @keywords internal
 #' @export

@@ -100,29 +100,3 @@ make_client <- function(id, secret) {
   )
 }
 
-#' Test an auth function
-#'
-#' @param function_req_auth `function` created using `bx_auth_create_code()` or
-#' `bx_auth_create_credentials()`
-#'
-#' @return Invisible `logical`, indicating success
-#' @export
-#'
-bx_auth_test <- function(function_req_auth) {
-
-  # TODO: change, put in own file
-  me <-
-    httr2::request(url_box_api("users/me")) %>% # replace with bx_req
-    function_req_auth() %>%
-    httr2::req_perform() %>% # replace with bx_req_run
-    httr2::resp_body_json()
-
-  name <- me[["name"]] %||% "<not available>"
-  id <- me[["id"]] %||% "<not available>"
-  login <- me[["login"]] %||% "<not available>"
-  message(
-    glue("{name} (id: {id}, login: {login}) authorized to Box API.")
-  )
-
-  invisible(function_req_auth)
-}
