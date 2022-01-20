@@ -4,7 +4,7 @@
 #'   - `function` with S3 class `cardboard_auth`: uses `auth`.
 #'   - `character`: uses auth function using name of stored in keyring,
 #'      see `bx_keyring_list()`.
-#'   - `list`: uses [bx_auth_parse()].
+#'   - `list`: uses [bx_auth_from_list()].
 #'   - `NULL`: if `bx_keyring_list()` has exactly one entry, uses it.
 #'
 #' @return `function` with S3 class `cardboard_auth`, fully operational
@@ -38,7 +38,7 @@ bx_auth_get.cardbord_auth <- function(auth) {
 #' @export
 #'
 bx_auth_get.list <- function(auth) {
-  rlang::exec(bx_auth_parse, !!!auth)
+  bx_auth_from_list(auth)
 }
 
 #' Coerce to auth function

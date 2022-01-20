@@ -1,13 +1,13 @@
 # ref: https://gargle.r-lib.org/articles/articles/managing-tokens-securely.html
 
-bx_auth_encrypt <- function(auth, file, key = NULL, nonce = NULL) {
+bx_auth_encrypt_file <- function(auth, file, key = NULL, nonce = NULL) {
 
   key <- as_key(key)
   nonce <- as_nonce(nonce)
 
 }
 
-bx_auth_decrypt <- function(file, key, nonce = NULL, .test = TRUE) {
+bx_auth_decrypt_file <- function(file, key, nonce = NULL, .test = TRUE) {
 
   nonce <- as_nonce(nonce)
 
@@ -15,13 +15,12 @@ bx_auth_decrypt <- function(file, key, nonce = NULL, .test = TRUE) {
 
 
 as_key <- function(key) {
-  key <- key %||% secret_gen()
-  message(key)
+  key <- key %||% key_gen()
   invisible(key)
 }
 
 # TODO: credit gargle
-secret_gen <- function() {
+key_gen <- function() {
 
   # uncouple from seed
   withr::local_preserve_seed()

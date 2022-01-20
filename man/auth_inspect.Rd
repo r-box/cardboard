@@ -12,7 +12,7 @@ auth_inspect(auth)
 \item \code{function} with S3 class \code{cardboard_auth}: uses \code{auth}.
 \item \code{character}: uses auth function using name of stored in keyring,
 see \code{bx_keyring_list()}.
-\item \code{list}: uses \code{\link[=bx_auth_parse]{bx_auth_parse()}}.
+\item \code{list}: uses \code{\link[=bx_auth_from_list]{bx_auth_from_list()}}.
 \item \code{NULL}: if \code{bx_keyring_list()} has exactly one entry, uses it.
 }}
 }
