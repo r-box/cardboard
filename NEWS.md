@@ -8,6 +8,8 @@
   - `bx_auth_inspect()`
   - `bx_auth_serialize()`
   - `bx_auth_parse()`
+  - `bx_auth_use()`
+  - `bx_auth()`
 
   
   (#4)

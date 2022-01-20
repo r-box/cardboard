@@ -50,6 +50,12 @@ bx_auth_get.list <- function(auth) {
 #' @keywords internal
 #'
 as_auth <- function(auth) {
+  auth <- auth %||% bx_auth()
+
+  if (is.null(auth)) {
+    message("Default auth not set, bx_auth_use()")
+  }
+
   auth <- bx_auth_get(auth)
 
   auth
