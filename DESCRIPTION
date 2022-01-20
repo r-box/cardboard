@@ -39,4 +39,6 @@ Imports:
     askpass,
     glue,
     rlang,
-    magrittr
+    magrittr,
+    sodium,
+    withr
