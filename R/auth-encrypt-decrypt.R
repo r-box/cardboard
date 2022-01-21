@@ -2,7 +2,8 @@
 
 #' Auth file encryprition
 #'
-#' @inheritParams as_auth
+#' @inheritParams bx_auth
+#' @inheritParams bx_auth_create_interactive
 #' @param file `character`
 #' @param key `character`
 #' @param nonce `character`

@@ -34,7 +34,6 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 Imports: 
-    keyring,
     httr2,
     askpass,
     glue,

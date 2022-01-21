@@ -10,10 +10,13 @@ bx_auth_encrypt_file(auth, file, key = NULL, nonce = NULL)
 bx_auth_decrypt_file(file, key, nonce = NULL, .test = TRUE)
 }
 \arguments{
-\item{auth}{Object coerced to auth function.
+\item{auth}{can be:
 \itemize{
-\item If \code{NULL}, returns default auth-function returned by \code{bx_auth()}.
-\item If \code{bx_auth()} returns \code{NULL}, tries \code{\link[=bx_auth_get]{bx_auth_get()}}.
+\item \code{function} with S3 class \code{cardboard_auth}: uses \code{auth}.
+\item \code{character}: uses auth function using name of stored in keyring,
+see \code{bx_keyring_list()}.
+\item \code{list}: uses \code{\link[=bx_auth_from_list]{bx_auth_from_list()}}.
+\item \code{NULL}: if \code{bx_keyring_list()} has exactly one entry, uses it.
 }}
 
 \item{file}{\code{character}}
@@ -21,6 +24,8 @@ bx_auth_decrypt_file(file, key, nonce = NULL, .test = TRUE)
 \item{key}{\code{character}}
 
 \item{nonce}{\code{character}}
+
+\item{.test}{\code{logical} indicates to test by calling the \code{users/me} resource.}
 }
 \value{
 Invisible \code{auth}, called for side effects.

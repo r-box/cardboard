@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 #library(cardboard)
 library(httr2)
-library(keyring)
 ```
 
 ```{r eval=FALSE}
