@@ -17,15 +17,13 @@ knitr::opts_chunk$set(
 ```{r setup}
 #library(cardboard)
 library(httr2)
-library(keyring)
 ```
 
 ```{r eval=FALSE}
 client_code <- oauth_client(
   id = Sys.getenv("BOX_CLIENT_ID"),
   secret = Sys.getenv("BOX_CLIENT_SECRET"),
-  token_url = "https://api.box.com/oauth2/token",
-  name = "boxr-ijl"
+  token_url = "https://api.box.com/oauth2/token"
 )
 ```
 
@@ -45,8 +43,7 @@ me <-
 client_cred <- oauth_client(
   id = Sys.getenv("BOX_CLIENT_ID_CRED"),
   secret = Sys.getenv("BOX_CLIENT_SECRET_CRED"),
-  token_url = "https://api.box.com/oauth2/token",
-  name = "boxr-ijl-cred"
+  token_url = "https://api.box.com/oauth2/token"
 )
 ```
 
