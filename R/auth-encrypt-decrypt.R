@@ -99,3 +99,4 @@ as_nonce_raw <- function(nonce) {
   nonce <- nonce %||% "4XQ5PHbHeoFZrqiPR1Lp4m3b"
   charToRaw(nonce)
 }
+
