@@ -41,4 +41,8 @@ Imports:
     rlang,
     magrittr,
     sodium,
-    withr
+    withr,
+    cli,
+    jsonlite,
+    fs,
+    utils

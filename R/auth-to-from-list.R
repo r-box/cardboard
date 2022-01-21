@@ -9,6 +9,9 @@
 #'
 bx_auth_to_list <- function(auth) {
   auth <- as_auth(auth)
+  list_auth <- auth_to_list(auth)
+
+  invisible(list_auth)
 }
 
 #' to_list an auth function
@@ -94,5 +97,5 @@ bx_auth_from_list <- function(list_auth, .test = FALSE) {
 
   auth <- rlang::exec(fn, !!!list_auth[["params"]])
 
-  return(auth)
+  invisible(auth)
 }

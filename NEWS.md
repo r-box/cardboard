@@ -7,11 +7,12 @@
   - `bx_auth_inspect()`
   - `bx_auth_to_list()`
   - `bx_auth_from_list()`
+  - `bx_auth_encrypt_file()`
+  - `bx_auth_decrypt_file()`
   - `bx_auth_get()`
   - `bx_auth_use()`
   - `bx_auth()`
 
-  
   (#4)
 
 * Added a `NEWS.md` file to track changes to the package.

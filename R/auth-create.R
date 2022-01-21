@@ -40,11 +40,12 @@ bx_auth_create_interactive <- function(id = NULL, secret = NULL,
     )
   }
 
+  class(req_auth) <- c("cardbord_auth_interactive", "cardbord_auth")
+
   if (.test) {
     bx_auth_test(req_auth)
   }
 
-  class(req_auth) <- c("cardbord_auth_interactive", "cardbord_auth")
   req_auth
 }
 
@@ -80,11 +81,13 @@ bx_auth_create_credentials <- function(id = NULL, secret = NULL,
     )
   }
 
+  class(req_auth) <- c("cardbord_auth_credentials", "cardbord_auth")
+
   if (.test) {
     bx_auth_test(req_auth)
   }
 
-  class(req_auth) <- c("cardbord_auth_credentials", "cardbord_auth")
+
   req_auth
 }
 
