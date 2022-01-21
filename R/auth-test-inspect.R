@@ -97,3 +97,7 @@ auth_inspect.cardbord_auth_credentials <- function(auth, ...) {
 
   invisible(auth)
 }
+
+skip_if_no_auth <- function() {
+  testthat::skip_if(is.null(bx_auth()))
+}

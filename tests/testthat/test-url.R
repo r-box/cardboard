@@ -11,5 +11,7 @@ test_that("url_box_api() works", {
 })
 
 test_that("auth works", {
+  skip_if_no_auth()
+
   expect_true(bx_auth_test(bx_auth()))
 })
